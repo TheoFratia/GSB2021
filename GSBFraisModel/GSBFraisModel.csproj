@@ -92,9 +92,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Buisness\Etat.cs" />
+    <Compile Include="Buisness\Etats.cs" />
     <Compile Include="Buisness\FicheFrais.cs" />
+    <Compile Include="Buisness\FraisForfait.cs" />
+    <Compile Include="Buisness\LigneFraisForfait.cs" />
+    <Compile Include="Buisness\LigneFraisHorsForfait.cs" />
     <Compile Include="Buisness\Visiteur.cs" />
+    <Compile Include="Data\DaoEtats.cs" />
+    <Compile Include="Data\DaoFicheFrais.cs" />
+    <Compile Include="Data\DaoFraisForfait.cs" />
+    <Compile Include="Data\DaoLigneFraisForfait.cs" />
+    <Compile Include="Data\DaoLigneFraisHorsForfait.cs" />
+    <Compile Include="Data\DaoVisiteurs.cs" />
+    <Compile Include="Data\Dbal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console", "Console\Console.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSBFraisModel", "GSBFraisModel\GSBFraisModel.csproj", "{49F252E0-1560-4CA9-88F6-6C9987769DF1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestionFrais", "GestionFrais\GestionFrais.csproj", "{03471B10-1E5B-4FE2-985C-3C319821CA58}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{49F252E0-1560-4CA9-88F6-6C9987769DF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49F252E0-1560-4CA9-88F6-6C9987769DF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49F252E0-1560-4CA9-88F6-6C9987769DF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03471B10-1E5B-4FE2-985C-3C319821CA58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03471B10-1E5B-4FE2-985C-3C319821CA58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03471B10-1E5B-4FE2-985C-3C319821CA58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03471B10-1E5B-4FE2-985C-3C319821CA58}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
