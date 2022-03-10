@@ -20,20 +20,20 @@ namespace GSBFrais.Model.Data
 
         public void Insert(LigneFraisHorsForfait LigneFraisHorsForfait)
         {
-            string query = " ligneFraisForfait (idVisiteur, mois, idFraitForfait, quentite) VALUES (" + LigneFraisHorsForfait.Id + ",' " + LigneFraisHorsForfait.IdVisiteur + ",'" + LigneFraisHorsForfait.Mois + ",'" + LigneFraisHorsForfait.Libelle + ",'" + LigneFraisHorsForfait.Date + ",'" + LigneFraisHorsForfait.Montant + "')";
+            string query = " ligneFraisForfait (idVisiteur, mois, idFraitForfait, quentite) VALUES ('" + LigneFraisHorsForfait.Id + "',' " + LigneFraisHorsForfait.IdVisiteur + "','" + LigneFraisHorsForfait.Mois + "','" + LigneFraisHorsForfait.Libelle + "','" + LigneFraisHorsForfait.Date + "','" + LigneFraisHorsForfait.Montant + "')";
             this.unDbal.Insert(query);
         }
 
         public void Update(LigneFraisHorsForfait LigneFraisHorsForfait)
         {
-            string query = " ligneFraisForfait (idVisiteur, mois, idFraitForfait, quentite) SET " + LigneFraisHorsForfait.Mois + ",'" + LigneFraisHorsForfait.Libelle + ",'" + LigneFraisHorsForfait.Date + ",'" + LigneFraisHorsForfait.Montant + "'";
-            this.unDbal.Insert(query);
+            string query = " ligneFraisForfait (idVisiteur, mois, idFraitForfait, quentite) SET '" + LigneFraisHorsForfait.Mois + "','" + LigneFraisHorsForfait.Libelle + "','" + LigneFraisHorsForfait.Date + "','" + LigneFraisHorsForfait.Montant + "'";
+            this.unDbal.Update(query);
         }
 
         public void Delete(LigneFraisHorsForfait LigneFraisHorsForfait)
         {
-            string query = " visiteur WHERE idVisiteur =" + LigneFraisHorsForfait.IdVisiteur + "AND id = " + LigneFraisHorsForfait.Id + "'";
-            this.unDbal.Insert(query);
+            string query = " visiteur WHERE idVisiteur ='" + LigneFraisHorsForfait.IdVisiteur + "'AND id ='" + LigneFraisHorsForfait.Id + "'";
+            this.unDbal.Delete(query);
         }
 
         public List<LigneFraisHorsForfait> SelectAll()
@@ -53,5 +53,5 @@ namespace GSBFrais.Model.Data
             DataRow result = this.unDbal.SelectById("ligneFraisHorsForfait", "id = " + idFraisHorsForfait);
             return new LigneFraisHorsForfait((int)result["id"], (string)result["idVisiteur"], (DateTime)result["mois"], (string)result["libelle"], (DateTime)result["date"], (decimal)result["montant"]);
         }
-    }
+    }//SELECTByFicheFrais
 }

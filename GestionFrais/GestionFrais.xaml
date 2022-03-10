@@ -5,8 +5,46 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GestionFrais"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
+        Title="GestionFrais" Height="625" Width="800">
+    <Grid x:Name="mainGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="7*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="27" TextWrapping="Wrap" Text="Nom" VerticalAlignment="Center" Width="110" Grid.Row="0" Margin="10,23,0,10"/>
+            <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="145,23,0,0" VerticalAlignment="Top" Width="144" Grid.Row="0" Height="27"/>
+            <ListBox x:Name="dataGrid" ItemsSource="{Binding ListFicheFrais}" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Height="396" Width="376"/>
+            <Button x:Name="button" Content="Valider la liste de frais" HorizontalAlignment="Left" Margin="10,20,0,0" Grid.Row="2" VerticalAlignment="Top" Width="147" Height="30" />
+            <Button x:Name="button1" Content="Refuser la liste de frais" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="3" VerticalAlignment="Top" Width="147" Height="29"/>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Label x:Name="label" Content="Eléments forfaitisés" HorizontalAlignment="Center" Margin="134,10,124,0" VerticalAlignment="Top" Height="30" FontSize="15"/>
+            <DataGrid x:Name="dataGrid1" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Height="178" Width="376"/>
+            <Label x:Name="label1" Content="Eléments hors forfait" HorizontalAlignment="Center" Margin="10,14,0,0" Grid.Row="2" VerticalAlignment="Top" FontSize="15"/>
+            <Button x:Name="button2" Content="Reporter le frais au mois suivant" HorizontalAlignment="Right" Margin="0,10,10,0" Grid.Row="4" VerticalAlignment="Top" Width="181" Height="30"/>
+            <Button x:Name="button3" Content="Refuser la ligne de frais" HorizontalAlignment="Right" Margin="0,12,10,0" Grid.Row="5" VerticalAlignment="Top" Width="138" Height="27"/>
+            <Button x:Name="button4" Content="Envoyer un message" HorizontalAlignment="Left" Margin="124,12,0,0" Grid.Row="5" VerticalAlignment="Top" Width="119" RenderTransformOrigin="-0.427,-0.318" Height="27"/>
+            <Button x:Name="button5" Content="Modifier" HorizontalAlignment="Left" Margin="37,12,0,0" Grid.Row="5" VerticalAlignment="Top" Width="82" Height="27"/>
+            <DataGrid x:Name="dataGrid2" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="3" VerticalAlignment="Top" Height="178" Width="376"/>
+        </Grid>
+
+
+
+
     </Grid>
 </Window>

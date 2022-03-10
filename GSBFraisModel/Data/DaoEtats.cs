@@ -21,20 +21,20 @@ namespace GSBFrais.Model.Data
 
         public void Insert(Etat unEtat)
         {
-            string query = " etat (id, libelle) VALUES (" + unEtat.Id + ",' " + unEtat.Libelle.Replace("'", "''") + "')";
+            string query = " etat (id, libelle) VALUES ('" + unEtat.Id + "',' " + unEtat.Libelle.Replace("'", "''") + "')";
             this.unDbal.Insert(query);
         }
 
         public void Update(Etat unEtat)
         {
-            string query = " etat (id, libelle) SET " + unEtat.Libelle.Replace("'", "''") + "'";
-            this.unDbal.Insert(query);
+            string query = " etat (id, libelle) SET '" + unEtat.Libelle.Replace("'", "''") + "'";
+            this.unDbal.Update(query);
         }
 
         public void Delete(Etat unEtat)
         {
-            string query = " visiteur WHERE id =" + unEtat.Id + "'";
-            this.unDbal.Insert(query);
+            string query = " visiteur WHERE id ='" + unEtat.Id + "'";
+            this.unDbal.Delete(query);
         }
 
         public List<Etat> SelectAll()
@@ -59,7 +59,7 @@ namespace GSBFrais.Model.Data
 
         public Etat SelectById(string idEtat)
         {
-            DataRow result = this.unDbal.SelectById("etat", "id = " + idEtat);
+            DataRow result = this.unDbal.SelectById("etat", idEtat);
             return new Etat((string)result["id"], (string)result["libelle"]);
         }
     }

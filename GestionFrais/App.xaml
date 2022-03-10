@@ -1,7 +1,7 @@
-﻿<Application x:Class="GestionFrais.App"
+﻿<Application x:Class="GSB.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:GestionFrais"
+             xmlns:local="clr-namespace:GSB"
              Startup="Application_Startup">
     <Application.Resources>
          

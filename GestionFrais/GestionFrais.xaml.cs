@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GestionFrais.viewModel;
 
 namespace GSB
 {
@@ -22,10 +23,18 @@ namespace GSB
     /// </summary>
     public partial class GestionFrais : Window
     {
-        public GestionFrais(DaoEtat theDaoEtat, DaoLigneFraisForfait thedaolignefraisforfait, DaoLigneFraisHorsForfait thedaolignefraishorsforfait, DaoVisiteurs thedaovisiteurs)
+        private DaoFicheFrais thedaofichefrais;
+        private DaoFraisForfait thedaofraisforfait;
+        private DaoLigneFraisHorsForfait thedaolignefraishorsforfait;
+        private DaoLigneFraisForfait thedaolignefraisforfait;
+        public GestionFrais(DaoFicheFrais myDaoFicheFrais, DaoFraisForfait mydaofraisforfait, DaoLigneFraisForfait mydaolignefraisforfait, DaoLigneFraisHorsForfait mydaolignefraishorsforfait)
         {
+            this.thedaofichefrais = myDaoFicheFrais;
+            this.thedaofraisforfait = mydaofraisforfait;
+            this.thedaofraisforfait = mydaofraisforfait;
+            this.thedaolignefraishorsforfait = mydaolignefraishorsforfait;
             InitializeComponent();
-            mainGrid.DataContext = new viewModel.viewModelFromage(thedaolignefraisforfait, thedaolignefraishorsforfait, thedaovisiteurs, theDaoEtat);
+            mainGrid.DataContext = new ViewModelGestionFrais(thedaofichefrais, thedaofraisforfait, thedaolignefraisforfait, thedaolignefraishorsforfait);
         }
     }
 }

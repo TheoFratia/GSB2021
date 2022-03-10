@@ -17,20 +17,20 @@ namespace GSBFrais.Model.Data
 
         public void Insert(FraisForfait unFraisForfait)
         {
-            string query = " fraisforfait (id, libelle, montant) VALUES (" + unFraisForfait.Id + ",' " + unFraisForfait.Libelle.Replace("'", "''") + unFraisForfait.Montant+ "')";
+            string query = " fraisforfait (id, libelle, montant) VALUES ('" + unFraisForfait.Id + "','" + unFraisForfait.Libelle.Replace("'", "''") +"','"+ unFraisForfait.Montant+ "')";
             this.unDbal.Insert(query);
         }
 
         public void Update(FraisForfait unFraisForfait)
         {
-            string query = " fraisforfait (id, libelle, montant) SET " + unFraisForfait.Libelle.Replace("'", "''") + unFraisForfait.Montant+ "'";
-            this.unDbal.Insert(query);
+            string query = " fraisforfait (id, libelle, montant) SET '" + unFraisForfait.Libelle.Replace("'", "''") + "','" + unFraisForfait.Montant+ "'";
+            this.unDbal.Update(query);
         }
 
         public void Delete(FraisForfait unFraisForfait)
         {
-            string query = " fraisforfait WHERE id =" + unFraisForfait.Id + "'";
-            this.unDbal.Insert(query);
+            string query = " fraisforfait WHERE id ='" + unFraisForfait.Id + "'";
+            this.unDbal.Delete(query);
         }
 
         public List<FraisForfait> SelectAll()
@@ -53,10 +53,10 @@ namespace GSBFrais.Model.Data
             return foundFraisForfait;
         }
 
-        public FraisForfait SelectById(string idFraisForfais)
+        /*public FraisForfait SelectById(string idFraisForfais)
         {
             DataRow result = this.unDbal.SelectById("fraisforfait", idFraisForfais);
             return new FraisForfait((string)result["id"], (string)result["libelle"], (decimal)result["montant"]);
-        }
-    }
+        }*/
+    }//SELECTBYMOIS
 }

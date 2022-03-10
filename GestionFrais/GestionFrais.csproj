@@ -55,6 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="viewModel\RelayCommand.cs" />
+    <Compile Include="viewModel\ViewModelBase.cs" />
+    <Compile Include="viewModel\ViewModelGestionFrais.cs" />
     <Page Include="GestionFrais.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

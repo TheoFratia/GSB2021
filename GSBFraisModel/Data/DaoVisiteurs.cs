@@ -27,13 +27,13 @@ namespace GSBFrais.Model.Data
 
         public void Update(Visiteur unVisiteur)
         {
-            string query = " visiteur (nom, prenom , login, mdp) SET ('" + unVisiteur.Nom.Replace("'", "''")+"','" + unVisiteur.Prenom.Replace("'", "''") + "','" + ",'" + unVisiteur.Login + "','" + unVisiteur.Mdp + "'" + "WHERE id = " + unVisiteur.Id + "')";
+            string query = " visiteur (nom, prenom , login, mdp) SET '" + unVisiteur.Nom.Replace("'", "''")+"','" + unVisiteur.Prenom.Replace("'", "''") + "','" + ",'" + unVisiteur.Login + "','" + unVisiteur.Mdp + "'" + "WHERE id = " + unVisiteur.Id + "'";
             this.unDbal.Update(query);
         }
 
         public void Delete(Visiteur unVisiteur)
         {
-            string query = " visiteur WHERE id =" + unVisiteur.Id + "'";
+            string query = " visiteur WHERE id ='" + unVisiteur.Id + "'";
             this.unDbal.Delete(query);
         }
 
@@ -59,7 +59,7 @@ namespace GSBFrais.Model.Data
 
         public Visiteur SelectById(string idVisiteur)
         {
-            DataRow result = this.unDbal.SelectById("visiteur","id = '" + idVisiteur+"'");
+            DataRow result = this.unDbal.SelectById("visiteur",  idVisiteur);
             return new Visiteur((string)result["id"], (string)result["nom"], (string)result["prenom"], (string)result["login"], (string)result["mdp"], (string)result["adresse"], (string)result["cp"], (string)result["ville"], (DateTime)result["dateEmbauche"]);
         }
     }

@@ -20,20 +20,20 @@ namespace GSBFrais.Model.Data
 
         public void Insert(LigneFraisForfait uneLigneFraisForfait)
         {
-            string query = " ligneFraisForfait (idVisiteur, mois, idFraitForfait, quentite) VALUES (" + uneLigneFraisForfait.IdVisiteur + ",' " + uneLigneFraisForfait.Mois +uneLigneFraisForfait.IdFraitForfait + uneLigneFraisForfait.Quantite + "')";
+            string query = " ligneFraisForfait (idVisiteur, mois, idFraitForfait, quentite) VALUES ('" + uneLigneFraisForfait.IdVisiteur + "','" + uneLigneFraisForfait.Mois + "','" + uneLigneFraisForfait.IdFraitForfait + "','" + uneLigneFraisForfait.Quantite + "')";
             this.unDbal.Insert(query);
         }
 
         public void Update(LigneFraisForfait uneLigneFraisForfait)
         {
-            string query = " ligneFraisForfait (idVisiteur, mois, idFraitForfait, quentite) SET " + uneLigneFraisForfait.IdVisiteur + ",' " + uneLigneFraisForfait.Mois + uneLigneFraisForfait.IdFraitForfait + uneLigneFraisForfait.Quantite + "'";
-            this.unDbal.Insert(query);
+            string query = " ligneFraisForfait (idVisiteur, mois, idFraitForfait, quentite) SET '" + uneLigneFraisForfait.IdVisiteur + "','" + uneLigneFraisForfait.Mois + "','" + uneLigneFraisForfait.IdFraitForfait + "','" + uneLigneFraisForfait.Quantite + "'";
+            this.unDbal.Update(query);
         }
 
         public void Delete(LigneFraisForfait uneLigneFraisForfait)
         {
-            string query = " visiteur WHERE idVisiteur =" + uneLigneFraisForfait.IdVisiteur + "AND idFraitForfait = "+ uneLigneFraisForfait.IdFraitForfait + "'";
-            this.unDbal.Insert(query);
+            string query = " visiteur WHERE idVisiteur ='" + uneLigneFraisForfait.IdVisiteur + "'AND idFraitForfait ='"+ uneLigneFraisForfait.IdFraitForfait + "'";
+            this.unDbal.Delete(query);
         }
 
         public List<LigneFraisForfait> SelectAll()
@@ -53,5 +53,6 @@ namespace GSBFrais.Model.Data
             DataRow result = this.unDbal.SelectById("ligneFraisForfait", "idFraisForfait = " + idFraisForfait);
             return new LigneFraisForfait((string)result["idVisiteur"], (DateTime)result["mois"], (string)result["idFraisForfait"], (decimal)result["quentite"]);
         }
+        //selectbyFicheFrais
     }
 }

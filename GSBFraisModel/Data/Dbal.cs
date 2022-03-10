@@ -139,6 +139,13 @@ namespace GSBFraisModel.Data
             return dataset.Tables[0].Rows[0];
         }
 
+        /*public DataRow SelectBYComposedPK2 FK2(string table, string id, string mois)
+        {
+            string query = "SELECT * FROM " + table + " where id='" + id + "'";
+            DataSet dataset = RQuery(query);
+            return dataset.Tables[0].Rows[0];
+        }*/
+
 
 
         public DataTable SelectByField(string table, string fieldTestCondition)
