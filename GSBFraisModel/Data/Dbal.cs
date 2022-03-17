@@ -129,7 +129,12 @@ namespace GSBFraisModel.Data
             DataSet dataset = RQuery(query);
             return dataset.Tables[0];
         }
-
+        public DataTable Select(string query)
+        {
+            query = "SELECT " + query;
+            DataSet dataset = RQuery(query);
+            return dataset.Tables[0];
+        }
 
 
         public DataRow SelectById(string table, string id)
@@ -139,12 +144,18 @@ namespace GSBFraisModel.Data
             return dataset.Tables[0].Rows[0];
         }
 
-        /*public DataRow SelectBYComposedPK2 FK2(string table, string id, string mois)
+        public DataRow SelectBYComposedPK2(string table, string keyname1, string keyname2, string id, string mois)
         {
-            string query = "SELECT * FROM " + table + " where id='" + id + "'";
+            string query = "SELECT * FROM " + table + " where " + keyname1 + "='" + id + "' AND" + keyname2 + "='" + mois + "'";
             DataSet dataset = RQuery(query);
-            return dataset.Tables[0].Rows[0];
-        }*/
+            if (dataset.Tables[0].Rows.Count != 0) { return dataset.Tables[0].Rows[0]; } else { return null; }
+        }
+        public DataTable SelectBYComposedFK2(string table,string keyname1,string keyname2, string id, string mois)
+        {
+            string query = "SELECT * FROM " + table + " where "+keyname1 + "='"+ id + "' AND"+ keyname2 + "='" + mois + "'";
+            DataSet dataset = RQuery(query);
+            return dataset.Tables[0];
+        }
 
 
 

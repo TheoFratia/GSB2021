@@ -43,6 +43,8 @@ namespace GSBFraisModel.Data
 
         public List<FicheFrais> SelectAll()
         {
+            List<LigneFraisForfait> listligneFraisForfait = new List<LigneFraisForfait>();
+            List<LigneFraisHorsForfait> listligneFraisHorsForfait = new List<LigneFraisHorsForfait>();
             List<FicheFrais> listVisiteur = new List<FicheFrais>();
             DataTable myTable = this.thedbal.SelectAll("FicheFrais");
 
@@ -63,10 +65,30 @@ namespace GSBFraisModel.Data
             return new FicheFrais(unVisiteur, (string)result["mois"], (decimal)result["montantValide"], (int)result["nbJustificatifs"], (DateTime)result["dateModif"], (Etat)result["Etat"]);
         }
 
-        /*public FicheFrais SelectListMois()
+        public List<string> SelectListMois()
         {
-            string query = "SELECT Distinct(mois) FROM FicheFrais Order by mois desc";
-        } SELECTbymois*/
+            List<string> listMois = new List<string>();
+            string query = " DISTINCT(mois) FROM FicheFrais Order by mois desc";
+            DataTable myTable = this.thedbal.Select(query);
+            foreach (DataRow r in myTable.Rows)
+            {
+                listMois.Add((string)r["mois"]);
+            }
+            return listMois;
+        }
+
+        public List<FicheFrais> SelectByMonth(string moisFiche)
+        {
+            List<FicheFrais> listeFicheFrais = new List<FicheFrais>();
+            DataTable maTable = this.thedbal.SelectByField("fichefrais", "mois = '" + moisFiche + "'");
+            foreach (DataRow r in maTable.Rows)
+            {
+                Visiteur leVisiteur = unDaoVisiteur.SelectById((string)r["idVisiteur"]);
+                Etat unEtat = unDaoEtat.SelectById((string)r["idEtat"]);
+                listeFicheFrais.Add(new FicheFrais(leVisiteur,(string)r["mois"],(decimal)r["montantvalide"], (int)r["nbJustificatifs"], (DateTime)r["dateModif"], unEtat));
+            }
+            return listeFicheFrais;
+        }
 
     }
 }

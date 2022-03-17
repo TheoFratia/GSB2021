@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GSBFraisModel.Buisness;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace GSBFrais.Model.Buisness
 {
     public class LigneFraisHorsForfait
     {
+        private FicheFrais uneFicheFrais;
         private int id;
         private string idVisiteur;
         private DateTime mois;
@@ -93,6 +95,16 @@ namespace GSBFrais.Model.Buisness
             }
         }
 
+        public LigneFraisHorsForfait(int unId, string unIdVisiteur, DateTime unMois, string unLibelle, DateTime uneDate, decimal unMontant, FicheFrais maFicheFrais)
+        {
+            this.Id = unId;
+            this.IdVisiteur = unIdVisiteur;
+            this.Mois = unMois;
+            this.Libelle = unLibelle;
+            this.Date = uneDate;
+            this.Montant = unMontant;
+            this.uneFicheFrais = maFicheFrais;
+        }
         public LigneFraisHorsForfait(int unId, string unIdVisiteur, DateTime unMois, string unLibelle, DateTime uneDate, decimal unMontant)
         {
             this.Id = unId;
@@ -102,6 +114,6 @@ namespace GSBFrais.Model.Buisness
             this.Date = uneDate;
             this.Montant = unMontant;
         }
-     
+
     }
 }

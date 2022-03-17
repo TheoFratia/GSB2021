@@ -49,11 +49,15 @@ namespace GSBFraisModel.Buisness
                 nbJustificatifs = value;
             }
         }
+        public List<LigneFraisForfait> LesLigneFraisForfait { get; set; }
+        public List<LigneFraisHorsForfait> LesLigneFraisHorsForfait { get; set; }
+
+
         public DateTime DateModif { get; set; }
 
         public override string ToString()
         {
-            return unVisiteur.Nom +"\t\t\t"+NbJustificatifs+"\t\t"+ montantValide;
+            return "Fiche Frais :  " + mois + " - " + unVisiteur.Id + " - " + unVisiteur.Nom + "  " + unVisiteur.Prenom +"\n";
         }
     }
 }

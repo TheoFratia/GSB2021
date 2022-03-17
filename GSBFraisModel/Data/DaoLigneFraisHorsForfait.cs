@@ -1,4 +1,5 @@
 ﻿using GSBFrais.Model.Buisness;
+using GSBFraisModel.Buisness;
 using GSBFraisModel.Data;
 using System;
 using System.Collections.Generic;
@@ -53,5 +54,11 @@ namespace GSBFrais.Model.Data
             DataRow result = this.unDbal.SelectById("ligneFraisHorsForfait", "id = " + idFraisHorsForfait);
             return new LigneFraisHorsForfait((int)result["id"], (string)result["idVisiteur"], (DateTime)result["mois"], (string)result["libelle"], (DateTime)result["date"], (decimal)result["montant"]);
         }
-    }//SELECTByFicheFrais
+        public List<LigneFraisForfait> selectbyFicheFrais(FicheFrais uneFicheFrais)
+        {
+            List<LigneFraisForfait> listLigneFraisForfait = new List<LigneFraisForfait>();
+            DataRow myTable = this.unDbal.SelectBYComposedPK2("ligneFraisForfait", "idVisiteur", "mois", uneFicheFrais.UnVisiteur.Id, uneFicheFrais.Mois);
+            return listLigneFraisForfait;
+        }
+    }
 }

@@ -14,6 +14,7 @@ namespace GestionFrais.viewModel
 {
     public class ViewModelGestionFrais : ViewModelBase
     {
+        private ObservableCollection<string> listMois;
         private ObservableCollection<FicheFrais> listFicheFrais;
         private ObservableCollection<FraisForfait> listFraisForfait;
         private ObservableCollection<LigneFraisForfait> listLigneFraisForfait;
@@ -57,8 +58,18 @@ namespace GestionFrais.viewModel
             set { listLigneFraisHorsForfait = value; }
         }
 
-     
+        public ObservableCollection<string> ListMois
+        {
+            get
+            {
+                return listMois;
+            }
 
+            set
+            {
+                listMois = value;
+            }
+        }
 
         public ViewModelGestionFrais(DaoFicheFrais thedaofichefrais, DaoFraisForfait thedaofraisforfait, DaoLigneFraisForfait thedaolignefraisforfait, DaoLigneFraisHorsForfait thedaolignefraishorsforfait)
         {
@@ -68,6 +79,7 @@ namespace GestionFrais.viewModel
             vmDaoLigneFraisHorsForfait = thedaolignefraishorsforfait;
 
             listFicheFrais = new ObservableCollection<FicheFrais>(thedaofichefrais.SelectAll());
+            listMois = new ObservableCollection<string>(thedaofichefrais.SelectListMois());
             /*listFraisForfait = new ObservableCollection<FraisForfait>(thedaofraisforfait.SelectAll());
             listLigneFraisForfait = new ObservableCollection<FraisForfait>(thedaolignefraisforfait.SelectAll());
             listLigneFraisHorsForfait = new ObservableCollection<FraisForfait>(thedaolignefraishorsforfait.SelectAll());
