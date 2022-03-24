@@ -19,8 +19,8 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <TextBox x:Name="textBox" TextWrapping="Wrap" Text="Nom" Grid.Row="0" Margin="10,23,0,0" Height="27" VerticalAlignment="Top" HorizontalAlignment="Left" Width="110"/>
-            <ComboBox x:Name="comboBox" ItemsSource="{Binding ListMois, Mode=OneWay}" Margin="145,23,0,0" Grid.Row="0" IsEditable="True" IsReadOnly="True" Text="-- Select month --" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Width="144" Height="27" VerticalAlignment="Top" SelectionChanged="comboBox_SelectionChanged"/>
-            <ListBox x:Name="dataGrid" ItemsSource="{Binding ListFicheFrais}" Margin="10,10,10,13" Grid.Row="1" FontSize="14"/>
+            <ComboBox x:Name="comboBox" ItemsSource="{Binding ListMois, Mode=OneWay}" SelectedItem="{Binding SelectedMois}" Margin="145,23,0,0" Grid.Row="0" IsEditable="True" IsReadOnly="True" Text="-- Select month --" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Width="144" Height="27" VerticalAlignment="Top" />
+            <ListBox x:Name="dataGrid" ItemsSource="{Binding ListFicheFrais}" SelectedItem="{Binding SelectedFicheFrais}" Margin="10,10,10,13" Grid.Row="1" FontSize="14"/>
             <Button x:Name="button" Content="Valider la liste de frais" Margin="10,20,0,0" Grid.Row="2" HorizontalAlignment="Left" Width="147" Height="30" VerticalAlignment="Top" />
             <Button x:Name="button1" Content="Refuser la liste de frais" Margin="10,10,0,0" Grid.Row="3" HorizontalAlignment="Left" Width="147" Height="29" VerticalAlignment="Top"/>
         </Grid>
@@ -34,7 +34,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Label x:Name="label" Content="Eléments forfaitisés" Margin="134,10,81,10" FontSize="15" FontWeight="Bold"/>
-            <DataGrid x:Name="dataGrid1" Margin="10,10,10,11" Grid.Row="1"/>
+            <DataGrid x:Name="dataGrid1" ItemsSource="{Binding ListFraisForfait}" Margin="10,10,10,11" Grid.Row="1"/>
             <Label x:Name="label1" Content="Eléments hors forfait" FontWeight="Bold" Margin="119,14,109,0" Grid.Row="2" VerticalAlignment="Top" FontSize="15"/>
             <Button x:Name="button2" Content="Reporter le frais au mois suivant" Margin="0,10,10,0" Grid.Row="4" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Width="181"/>
             <Button x:Name="button3" Content="Refuser la ligne de frais" Margin="248,12,0,0" Grid.Row="5" Height="27" VerticalAlignment="Top" HorizontalAlignment="Left" Width="138"/>

@@ -44,7 +44,7 @@ namespace GSBFrais.Model.Data
 
             foreach (DataRow r in myTable.Rows)
             {
-                listLigneFraisForfait.Add(new LigneFraisHorsForfait((int)r["id"], (string)r["idVisiteur"],(DateTime)r["mois"], (string)r["libelle"], (DateTime)r["date"], (decimal)r["montant"]));
+                listLigneFraisForfait.Add(new LigneFraisHorsForfait((int)r["id"], (string)r["idVisiteur"],(string)r["mois"], (string)r["libelle"], (DateTime)r["date"], (decimal)r["montant"]));
             }
             return listLigneFraisForfait;
         }
@@ -52,13 +52,18 @@ namespace GSBFrais.Model.Data
         public LigneFraisHorsForfait SelectById(string idFraisHorsForfait)
         {
             DataRow result = this.unDbal.SelectById("ligneFraisHorsForfait", "id = " + idFraisHorsForfait);
-            return new LigneFraisHorsForfait((int)result["id"], (string)result["idVisiteur"], (DateTime)result["mois"], (string)result["libelle"], (DateTime)result["date"], (decimal)result["montant"]);
+            return new LigneFraisHorsForfait((int)result["id"], (string)result["idVisiteur"], (string)result["mois"], (string)result["libelle"], (DateTime)result["date"], (decimal)result["montant"]);
         }
-        public List<LigneFraisForfait> selectbyFicheFrais(FicheFrais uneFicheFrais)
+        public List<LigneFraisHorsForfait> selectbyFicheFrais(FicheFrais uneFicheFrais)
         {
-            List<LigneFraisForfait> listLigneFraisForfait = new List<LigneFraisForfait>();
-            DataRow myTable = this.unDbal.SelectBYComposedPK2("ligneFraisForfait", "idVisiteur", "mois", uneFicheFrais.UnVisiteur.Id, uneFicheFrais.Mois);
-            return listLigneFraisForfait;
+            List<LigneFraisHorsForfait> listLigneFraisHorsForfait = new List<LigneFraisHorsForfait>();
+            DataTable myTable = this.unDbal.SelectBYComposedFK2("ligneFraisHorsForfait", "idVisiteur", " mois", uneFicheFrais.UnVisiteur.Id, uneFicheFrais.Mois);
+            foreach (DataRow r in myTable.Rows)
+            {
+                listLigneFraisHorsForfait.Add(new LigneFraisHorsForfait((int)r["id"], (string)r["idVisiteur"], (string)r["mois"], (string)r["libelle"], (DateTime)r["date"], (decimal)r["montant"]));
+            }
+            
+            return listLigneFraisHorsForfait;
         }
     }
 }

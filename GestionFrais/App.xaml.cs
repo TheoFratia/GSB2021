@@ -27,12 +27,13 @@ namespace GSB
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             thedbal = new Dbal();
+            thedaolignefraisforfait = new DaoLigneFraisForfait(thedbal);
+            thedaolignefraishorsforfait = new DaoLigneFraisHorsForfait(thedbal);
             thedaovisiteurs = new DaoVisiteurs(thedbal);
             thedaoetat = new DaoEtat(thedbal);
             thedaofraisforfait = new DaoFraisForfait(thedbal);
-            thedaofichefrais = new DaoFicheFrais(thedbal, thedaovisiteurs, thedaoetat);
-            thedaolignefraisforfait = new DaoLigneFraisForfait(thedbal);
-            thedaolignefraishorsforfait = new DaoLigneFraisHorsForfait(thedbal);
+            thedaofichefrais = new DaoFicheFrais(thedbal, thedaovisiteurs, thedaoetat, thedaolignefraisforfait, thedaolignefraishorsforfait);
+            
            
 
             // Create the startup window

@@ -16,11 +16,15 @@ namespace GestionFrais.viewModel
     {
         private ObservableCollection<string> listMois;
         private ObservableCollection<FicheFrais> listFicheFrais;
+
         private ObservableCollection<FraisForfait> listFraisForfait;
         private ObservableCollection<LigneFraisForfait> listLigneFraisForfait;
         private ObservableCollection<LigneFraisHorsForfait> listLigneFraisHorsForfait;
         private ObservableCollection<Visiteur> listVisiteur;
 
+
+        private string selectedMois;
+        private FicheFrais selectedFicheFrais;
 
         private ICommand updateCommand;
 
@@ -70,27 +74,44 @@ namespace GestionFrais.viewModel
                 listMois = value;
             }
         }
+        public FicheFrais SelectedFicheFrais
+        {
+            get
+            {
+                return selectedFicheFrais;
+            }
+
+            set
+            {
+                selectedFicheFrais = value;
+                OnPropertyChanged("SelectedFicheFrais");
+                ListLigneFraisForfait = new ObservableCollection<LigneFraisForfait>(selectedFicheFrais.LesLigneFraisForfait);
+                OnPropertyChanged("ListFraisForfait");
+            }
+        }
+
+        public string SelectedMois
+        {
+            get
+            {
+                return selectedMois;
+            }
+
+            set
+            {
+                selectedMois = value;
+                OnPropertyChanged("SelectedMois");
+                listFicheFrais = new ObservableCollection<FicheFrais>(vmDaoFicheFrais.SelectByMonth(SelectedMois));
+                OnPropertyChanged("ListFicheFrais");
+            }
+        }
 
         public ViewModelGestionFrais(DaoFicheFrais thedaofichefrais, DaoFraisForfait thedaofraisforfait, DaoLigneFraisForfait thedaolignefraisforfait, DaoLigneFraisHorsForfait thedaolignefraishorsforfait)
         {
             vmDaoFicheFrais = thedaofichefrais;
-            vmDaoFraisForfait = thedaofraisforfait;
-            vmDaoLigneFraisForfait = thedaolignefraisforfait;
-            vmDaoLigneFraisHorsForfait = thedaolignefraishorsforfait;
 
-            listFicheFrais = new ObservableCollection<FicheFrais>(thedaofichefrais.SelectAll());
             listMois = new ObservableCollection<string>(thedaofichefrais.SelectListMois());
-            /*listFraisForfait = new ObservableCollection<FraisForfait>(thedaofraisforfait.SelectAll());
-            listLigneFraisForfait = new ObservableCollection<FraisForfait>(thedaolignefraisforfait.SelectAll());
-            listLigneFraisHorsForfait = new ObservableCollection<FraisForfait>(thedaolignefraishorsforfait.SelectAll());
-
-            //je relie (ou connecte) les deux listes entre elles, comme ça quand je sélectione un fromage, le pays est mis à jour dans la combobox
-            foreach (Fromage thef in ListFromages)
-            {
-                int i = 0;
-                while (thef.Origin.Name != listPays[i].Name) i++;
-                thef.Origin = listPays[i];
-            }*/
+            listFicheFrais = new ObservableCollection<FicheFrais>(thedaofichefrais.SelectAll());
 
         }
     }

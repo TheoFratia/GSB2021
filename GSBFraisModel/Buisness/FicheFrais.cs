@@ -19,17 +19,14 @@ namespace GSBFraisModel.Buisness
 
         public FicheFrais(Visiteur Visiteur, string unMois, decimal unMontantValide, int unNbJustificatifs, DateTime uneDateModif, Etat unEtat)
         {
-            this.unVisiteur = Visiteur;
-            this.mois = unMois;
+            this.UnVisiteur = Visiteur;
+            this.Mois = unMois;
             this.montantValide = unMontantValide;
             this.nbJustificatifs = unNbJustificatifs;
             this.dateTime = uneDateModif;
-            this.unEtat = unEtat;
+            this.UnEtat = unEtat;
         }
 
-        internal Visiteur UnVisiteur { get; set; }
-        public string Mois { get; set; }
-        internal Etat UnEtat { get; set; }
         public decimal MontantValide
         {
             get
@@ -55,9 +52,48 @@ namespace GSBFraisModel.Buisness
 
         public DateTime DateModif { get; set; }
 
+        public string Mois
+        {
+            get
+            {
+                return mois;
+            }
+
+            set
+            {
+                mois = value;
+            }
+        }
+
+        public Visiteur UnVisiteur
+        {
+            get
+            {
+                return unVisiteur;
+            }
+
+            set
+            {
+                unVisiteur = value;
+            }
+        }
+
+        public Etat UnEtat
+        {
+            get
+            {
+                return unEtat;
+            }
+
+            set
+            {
+                unEtat = value;
+            }
+        }
+
         public override string ToString()
         {
-            return "Fiche Frais :  " + mois + " - " + unVisiteur.Id + " - " + unVisiteur.Nom + "  " + unVisiteur.Prenom +"\n";
+            return "Fiche Frais :  " + Mois + " - " + UnVisiteur.Id + " - " + UnVisiteur.Nom + "  " + UnVisiteur.Prenom +"\n";
         }
     }
 }

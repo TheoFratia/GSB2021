@@ -36,10 +36,5 @@ namespace GSB
             InitializeComponent();
             mainGrid.DataContext = new ViewModelGestionFrais(thedaofichefrais, thedaofraisforfait, thedaolignefraisforfait, thedaolignefraishorsforfait);
         }
-
-        private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
     }
 }

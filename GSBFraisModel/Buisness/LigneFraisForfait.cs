@@ -12,10 +12,10 @@ namespace GSBFrais.Model.Buisness
         private FicheFrais uneFicheFrais;
         private string idVisiteur;
         private string idFraitForfait;
-        private DateTime mois;
-        private decimal quantite;
+        private string mois;
+        private int quantite;
 
-        public LigneFraisForfait(string unIdVisiteur, DateTime unMois,string unIdFraitForfait , decimal uneQuantite, FicheFrais maFicheFrais)
+        public LigneFraisForfait(string unIdVisiteur, string unMois,string unIdFraitForfait , int uneQuantite, FicheFrais maFicheFrais)
         {
             this.idVisiteur = unIdVisiteur;
             this.mois = unMois;
@@ -23,7 +23,7 @@ namespace GSBFrais.Model.Buisness
             this.quantite = uneQuantite;
             this.uneFicheFrais = maFicheFrais;
         }
-        public LigneFraisForfait(string unIdVisiteur, DateTime unMois, string unIdFraitForfait, decimal uneQuantite)
+        public LigneFraisForfait(string unIdVisiteur, string unMois, string unIdFraitForfait, int uneQuantite)
         {
             this.idVisiteur = unIdVisiteur;
             this.mois = unMois;
@@ -43,7 +43,7 @@ namespace GSBFrais.Model.Buisness
             }
         }
 
-        public DateTime Mois
+        public string Mois
         {
             get
             {
@@ -56,7 +56,7 @@ namespace GSBFrais.Model.Buisness
             }
         }
 
-        public decimal Quantite
+        public int Quantite
         {
             get
             {

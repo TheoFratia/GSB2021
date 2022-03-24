@@ -152,7 +152,7 @@ namespace GSBFraisModel.Data
         }
         public DataTable SelectBYComposedFK2(string table,string keyname1,string keyname2, string id, string mois)
         {
-            string query = "SELECT * FROM " + table + " where "+keyname1 + "='"+ id + "' AND"+ keyname2 + "='" + mois + "'";
+            string query = "SELECT * FROM " + table + " where "+keyname1 + "='"+ id + "' AND "+ keyname2 + "='" + mois + "'";
             DataSet dataset = RQuery(query);
             return dataset.Tables[0];
         }

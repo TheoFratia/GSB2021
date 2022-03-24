@@ -15,12 +15,16 @@ namespace GSBFraisModel.Data
         private Dbal thedbal;
         private DaoVisiteurs unDaoVisiteur;
         private DaoEtat unDaoEtat;
+        private DaoLigneFraisForfait uneDaoLigneFraisForfait;
+        private DaoLigneFraisHorsForfait uneDaoLigneFraisHorsForfait;
 
-        public DaoFicheFrais(Dbal mydbal, DaoVisiteurs myDaoVisiteur, DaoEtat myEtat)
+        public DaoFicheFrais(Dbal mydbal, DaoVisiteurs myDaoVisiteur, DaoEtat myEtat, DaoLigneFraisForfait myLigneFraisForfait, DaoLigneFraisHorsForfait myLigneFraisHorsForfait)
         {
             this.thedbal = mydbal;
             this.unDaoVisiteur = myDaoVisiteur;
             this.unDaoEtat = myEtat;
+            this.uneDaoLigneFraisForfait = myLigneFraisForfait;
+            this.uneDaoLigneFraisHorsForfait = myLigneFraisHorsForfait;
         }
 
         public void Insert(FicheFrais theFicheFrais)
@@ -47,12 +51,16 @@ namespace GSBFraisModel.Data
             List<LigneFraisHorsForfait> listligneFraisHorsForfait = new List<LigneFraisHorsForfait>();
             List<FicheFrais> listVisiteur = new List<FicheFrais>();
             DataTable myTable = this.thedbal.SelectAll("FicheFrais");
-
             foreach (DataRow r in myTable.Rows)
             {
                 Visiteur unVisiteur = unDaoVisiteur.SelectById((string)r["idVisiteur"]);
                 Etat unEtat = unDaoEtat.SelectById((string)r["idEtat"]);
-                listVisiteur.Add(new FicheFrais(unVisiteur,(string)r["mois"], (decimal)r["montantValide"], (int)r["nbJustificatifs"], (DateTime)r["dateModif"], unEtat));
+                FicheFrais uneFicheFrais = new FicheFrais(unVisiteur, (string)r["mois"], (decimal)r["montantValide"], (int)r["nbJustificatifs"], (DateTime)r["dateModif"], unEtat);
+                listligneFraisForfait = uneDaoLigneFraisForfait.selectbyFicheFrais(uneFicheFrais);
+                listligneFraisHorsForfait = uneDaoLigneFraisHorsForfait.selectbyFicheFrais(uneFicheFrais);
+                uneFicheFrais.LesLigneFraisHorsForfait = listligneFraisHorsForfait;
+                uneFicheFrais.LesLigneFraisForfait = listligneFraisForfait;
+                listVisiteur.Add(uneFicheFrais);
             }
             return listVisiteur;
         }
@@ -83,6 +91,8 @@ namespace GSBFraisModel.Data
             DataTable maTable = this.thedbal.SelectByField("fichefrais", "mois = '" + moisFiche + "'");
             foreach (DataRow r in maTable.Rows)
             {
+                List<LigneFraisForfait> listligneFraisForfait = new List<LigneFraisForfait>();
+                List<LigneFraisHorsForfait> listligneFraisHorsForfait = new List<LigneFraisHorsForfait>();
                 Visiteur leVisiteur = unDaoVisiteur.SelectById((string)r["idVisiteur"]);
                 Etat unEtat = unDaoEtat.SelectById((string)r["idEtat"]);
                 listeFicheFrais.Add(new FicheFrais(leVisiteur,(string)r["mois"],(decimal)r["montantvalide"], (int)r["nbJustificatifs"], (DateTime)r["dateModif"], unEtat));
