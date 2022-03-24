@@ -91,11 +91,12 @@ namespace GSBFraisModel.Data
             DataTable maTable = this.thedbal.SelectByField("fichefrais", "mois = '" + moisFiche + "'");
             foreach (DataRow r in maTable.Rows)
             {
-                List<LigneFraisForfait> listligneFraisForfait = new List<LigneFraisForfait>();
-                List<LigneFraisHorsForfait> listligneFraisHorsForfait = new List<LigneFraisHorsForfait>();
                 Visiteur leVisiteur = unDaoVisiteur.SelectById((string)r["idVisiteur"]);
                 Etat unEtat = unDaoEtat.SelectById((string)r["idEtat"]);
-                listeFicheFrais.Add(new FicheFrais(leVisiteur,(string)r["mois"],(decimal)r["montantvalide"], (int)r["nbJustificatifs"], (DateTime)r["dateModif"], unEtat));
+                FicheFrais uneFicheFrais = new FicheFrais(leVisiteur, (string)r["mois"], (decimal)r["montantvalide"], (int)r["nbJustificatifs"], (DateTime)r["dateModif"], unEtat);
+                uneFicheFrais.LesLigneFraisForfait = uneDaoLigneFraisForfait.selectbyFicheFrais(uneFicheFrais);
+                uneFicheFrais.LesLigneFraisHorsForfait = uneDaoLigneFraisHorsForfait.selectbyFicheFrais(uneFicheFrais);
+                listeFicheFrais.Add(uneFicheFrais);
             }
             return listeFicheFrais;
         }

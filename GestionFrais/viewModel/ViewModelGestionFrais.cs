@@ -84,9 +84,13 @@ namespace GestionFrais.viewModel
             set
             {
                 selectedFicheFrais = value;
+             
                 OnPropertyChanged("SelectedFicheFrais");
-                ListLigneFraisForfait = new ObservableCollection<LigneFraisForfait>(selectedFicheFrais.LesLigneFraisForfait);
-                OnPropertyChanged("ListFraisForfait");
+                if (selectedFicheFrais != null)
+                {
+                    ListLigneFraisForfait = new ObservableCollection<LigneFraisForfait>(selectedFicheFrais.LesLigneFraisForfait);
+                    OnPropertyChanged("ListFraisForfait");
+                }
             }
         }
 
