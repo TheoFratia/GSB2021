@@ -1,4 +1,5 @@
-﻿using GSBFrais.Model.Buisness;
+﻿using GestionFrais.ViewModel;
+using GSBFrais.Model.Buisness;
 using GSBFrais.Model.Data;
 using GSBFraisModel.Buisness;
 using GSBFraisModel.Data;
@@ -54,12 +55,15 @@ namespace GestionFrais.viewModel
         public ObservableCollection<LigneFraisForfait> ListLigneFraisForfait
         {
             get { return listLigneFraisForfait; }
-            set { listLigneFraisForfait = value; }
+            set { listLigneFraisForfait = value;
+                OnPropertyChanged("ListLigneFraisForfait");}
         }
         public ObservableCollection<LigneFraisHorsForfait> ListLigneFraisHorsForfait
         {
             get { return listLigneFraisHorsForfait; }
-            set { listLigneFraisHorsForfait = value; }
+            set { listLigneFraisHorsForfait = value;
+                OnPropertyChanged("ListLigneFraisHorsForfait");
+            }
         }
 
         public ObservableCollection<string> ListMois
@@ -89,7 +93,12 @@ namespace GestionFrais.viewModel
                 if (selectedFicheFrais != null)
                 {
                     ListLigneFraisForfait = new ObservableCollection<LigneFraisForfait>(selectedFicheFrais.LesLigneFraisForfait);
-                    OnPropertyChanged("ListFraisForfait");
+                    ListLigneFraisHorsForfait = new ObservableCollection<LigneFraisHorsForfait>(selectedFicheFrais.LesLigneFraisHorsForfait);
+                }
+                else
+                {
+                    ListLigneFraisForfait = null;
+                    ListLigneFraisHorsForfait = null;
                 }
             }
         }

@@ -31,7 +31,7 @@ namespace GSB
         {
             this.thedaofichefrais = myDaoFicheFrais;
             this.thedaofraisforfait = mydaofraisforfait;
-            this.thedaofraisforfait = mydaofraisforfait;
+            this.thedaolignefraisforfait = mydaolignefraisforfait;
             this.thedaolignefraishorsforfait = mydaolignefraishorsforfait;
             InitializeComponent();
             mainGrid.DataContext = new ViewModelGestionFrais(thedaofichefrais, thedaofraisforfait, thedaolignefraisforfait, thedaolignefraishorsforfait);
