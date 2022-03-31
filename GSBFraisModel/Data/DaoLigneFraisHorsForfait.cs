@@ -21,13 +21,17 @@ namespace GSBFrais.Model.Data
 
         public void Insert(LigneFraisHorsForfait LigneFraisHorsForfait)
         {
-            string query = " ligneFraisForfait (idVisiteur, mois, idFraitForfait, quentite) VALUES ('" + LigneFraisHorsForfait.Id + "',' " + LigneFraisHorsForfait.IdVisiteur + "','" + LigneFraisHorsForfait.Mois + "','" + LigneFraisHorsForfait.Libelle + "','" + LigneFraisHorsForfait.Date + "','" + LigneFraisHorsForfait.Montant + "')";
+            string query = " ligneFraisForfait (idVisiteur, mois, idFraitForfait, quantite) VALUES ('" + LigneFraisHorsForfait.Id + "',' " + LigneFraisHorsForfait.IdVisiteur + "','" + LigneFraisHorsForfait.Mois + "','" + LigneFraisHorsForfait.Libelle + "','" + LigneFraisHorsForfait.Date + "','" + LigneFraisHorsForfait.Montant + "')";
             this.unDbal.Insert(query);
         }
 
-        public void Update(LigneFraisHorsForfait LigneFraisHorsForfait)
+        public void Update(LigneFraisHorsForfait uneLigneFraisHorsForfait)
         {
-            string query = " ligneFraisForfait (idVisiteur, mois, idFraitForfait, quentite) SET '" + LigneFraisHorsForfait.Mois + "','" + LigneFraisHorsForfait.Libelle + "','" + LigneFraisHorsForfait.Date + "','" + LigneFraisHorsForfait.Montant + "'";
+            string montant = uneLigneFraisHorsForfait.Montant.ToString();
+            string query = " ligneFraisHorsForfait SET montant=" + montant.Replace(",",".")
+                +", libelle='" + uneLigneFraisHorsForfait.Libelle.Replace("'", "''")
+                +"', date='" + uneLigneFraisHorsForfait.Date.ToString("yyyy-MM-dd")
+                + "' WHERE id=" + uneLigneFraisHorsForfait.Id;
             this.unDbal.Update(query);
         }
 

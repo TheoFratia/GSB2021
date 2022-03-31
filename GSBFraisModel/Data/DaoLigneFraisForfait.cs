@@ -21,13 +21,16 @@ namespace GSBFrais.Model.Data
 
         public void Insert(LigneFraisForfait uneLigneFraisForfait)
         {
-            string query = " ligneFraisForfait (idVisiteur, mois, idFraitForfait, quentite) VALUES ('" + uneLigneFraisForfait.IdVisiteur + "','" + uneLigneFraisForfait.Mois + "','" + uneLigneFraisForfait.IdFraitForfait + "','" + uneLigneFraisForfait.Quantite + "')";
+            string query = " ligneFraisForfait (idVisiteur, mois, idFraitForfait, quantite) VALUES ('" + uneLigneFraisForfait.IdVisiteur + "','" + uneLigneFraisForfait.Mois + "','" + uneLigneFraisForfait.IdFraitForfait + "','" + uneLigneFraisForfait.Quantite + "')";
             this.unDbal.Insert(query);
         }
 
         public void Update(LigneFraisForfait uneLigneFraisForfait)
         {
-            string query = " ligneFraisForfait (idVisiteur, mois, idFraitForfait, quentite) SET '" + uneLigneFraisForfait.IdVisiteur + "','" + uneLigneFraisForfait.Mois + "','" + uneLigneFraisForfait.IdFraitForfait + "','" + uneLigneFraisForfait.Quantite + "'";
+            string query = " ligneFraisForfait SET quantite=" + uneLigneFraisForfait.Quantite
+                + " WHERE idVisiteur ='" + uneLigneFraisForfait.IdVisiteur.Replace("'", "''") 
+                + "' AND mois='" + uneLigneFraisForfait.Mois.Replace("'", "''")
+                + "' AND idFraisForfait='" + uneLigneFraisForfait.IdFraitForfait.Replace("'", "''") + "'";
             this.unDbal.Update(query);
         }
 

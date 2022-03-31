@@ -21,7 +21,7 @@ namespace GSBFrais.Model.Buisness
             this.mois = unMois;
             this.idFraitForfait = unIdFraitForfait;
             this.quantite = uneQuantite;
-            this.uneFicheFrais = maFicheFrais;
+            this.UneFicheFrais = maFicheFrais;
         }
         public LigneFraisForfait(string unIdVisiteur, string unMois, string unIdFraitForfait, int uneQuantite)
         {
@@ -79,6 +79,19 @@ namespace GSBFrais.Model.Buisness
             set
             {
                 idFraitForfait = value;
+            }
+        }
+
+        public FicheFrais UneFicheFrais
+        {
+            get
+            {
+                return uneFicheFrais;
+            }
+
+            set
+            {
+                uneFicheFrais = value;
             }
         }
     }

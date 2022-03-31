@@ -15,7 +15,9 @@ namespace GestionFrais.viewModel
 {
     public class ViewModelGestionFrais : ViewModelBase
     {
+        private ObservableCollection<string> listEtat;
         private ObservableCollection<string> listMois;
+        private string suivi;
         private ObservableCollection<FicheFrais> listFicheFrais;
 
         private ObservableCollection<FraisForfait> listFraisForfait;
@@ -27,7 +29,8 @@ namespace GestionFrais.viewModel
         private string selectedMois;
         private FicheFrais selectedFicheFrais;
 
-        private ICommand updateCommand;
+        private ICommand updateFicheFrais;
+        private ICommand etatFiche;
 
         private DaoEtat vmDaoEtats;
         private DaoFicheFrais vmDaoFicheFrais;
@@ -119,13 +122,93 @@ namespace GestionFrais.viewModel
             }
         }
 
-        public ViewModelGestionFrais(DaoFicheFrais thedaofichefrais, DaoFraisForfait thedaofraisforfait, DaoLigneFraisForfait thedaolignefraisforfait, DaoLigneFraisHorsForfait thedaolignefraishorsforfait)
+        public ICommand UpdateFicheFrais
+        {
+            get
+            {
+                if (this.updateFicheFrais == null)
+                {
+                    this.updateFicheFrais = new RelayCommand(() => UpdateLesFicheFrais(), () => true);
+                }
+                return this.updateFicheFrais;
+
+            }
+        }
+
+        public ICommand EtatFiche
+        {
+            get
+            {
+                if (this.etatFiche == null)
+                {
+                    this.etatFiche = new RelayCommand(() => SuivreEtatFiche(), () => true);
+                }
+                return this.etatFiche;
+
+            }
+        }
+
+        public string Suivi
+        {
+            get
+            {
+                return suivi;
+            }
+
+            set
+            {
+                suivi = value;
+            }
+        }
+
+        public ObservableCollection<string> ListEtat
+        {
+            get
+            {
+                return listEtat;
+            }
+
+            set
+            {
+                listEtat = value;
+            }
+        }
+
+        public ViewModelGestionFrais(DaoFicheFrais thedaofichefrais, DaoFraisForfait thedaofraisforfait, DaoLigneFraisForfait thedaolignefraisforfait, DaoLigneFraisHorsForfait thedaolignefraishorsforfait, DaoEtat theDaoEtat)
         {
             vmDaoFicheFrais = thedaofichefrais;
+            vmDaoLigneFraisForfait = thedaolignefraisforfait;
+            vmDaoLigneFraisHorsForfait = thedaolignefraishorsforfait;
+            vmDaoEtats = theDaoEtat;
 
+            listEtat = new ObservableCollection<string>(theDaoEtat.SelectListEtat());
             listMois = new ObservableCollection<string>(thedaofichefrais.SelectListMois());
             listFicheFrais = new ObservableCollection<FicheFrais>(thedaofichefrais.SelectAll());
 
+        }
+        private void UpdateLesFicheFrais()
+        {
+            if(selectedFicheFrais != null)
+            {
+                foreach(LigneFraisForfait lff in ListLigneFraisForfait)
+                {
+                    vmDaoLigneFraisForfait.Update(lff);
+                }
+                foreach (LigneFraisHorsForfait lfhf in ListLigneFraisHorsForfait)
+                {
+                    vmDaoLigneFraisHorsForfait.Update(lfhf);
+                }
+            }
+
+        }
+
+        private void SuivreEtatFiche()
+        {
+            if (selectedFicheFrais != null)
+            {
+                Suivi = selectedFicheFrais.UnEtat.Libelle;
+                OnPropertyChanged("Suivi");
+            }
         }
     }
 }

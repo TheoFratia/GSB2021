@@ -27,14 +27,30 @@ namespace GSB
         private DaoFraisForfait thedaofraisforfait;
         private DaoLigneFraisHorsForfait thedaolignefraishorsforfait;
         private DaoLigneFraisForfait thedaolignefraisforfait;
-        public GestionFrais(DaoFicheFrais myDaoFicheFrais, DaoFraisForfait mydaofraisforfait, DaoLigneFraisForfait mydaolignefraisforfait, DaoLigneFraisHorsForfait mydaolignefraishorsforfait)
+        private DaoEtat thedaoetat;
+        public GestionFrais(DaoFicheFrais myDaoFicheFrais, DaoFraisForfait mydaofraisforfait, DaoLigneFraisForfait mydaolignefraisforfait, DaoLigneFraisHorsForfait mydaolignefraishorsforfait, DaoEtat mydaoEtat)
         {
             this.thedaofichefrais = myDaoFicheFrais;
             this.thedaofraisforfait = mydaofraisforfait;
             this.thedaolignefraisforfait = mydaolignefraisforfait;
             this.thedaolignefraishorsforfait = mydaolignefraishorsforfait;
+            this.thedaoetat = mydaoEtat;
+            
             InitializeComponent();
-            mainGrid.DataContext = new ViewModelGestionFrais(thedaofichefrais, thedaofraisforfait, thedaolignefraisforfait, thedaolignefraishorsforfait);
+            mainGrid.DataContext = new ViewModelGestionFrais(thedaofichefrais, thedaofraisforfait, thedaolignefraisforfait, thedaolignefraishorsforfait, thedaoetat);
+        }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            if (dataGrid.SelectedIndex != null)
+            {
+                comboBox1.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void dataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            comboBox1.Visibility = Visibility.Hidden;
         }
     }
 }

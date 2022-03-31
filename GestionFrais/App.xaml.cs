@@ -37,7 +37,7 @@ namespace GSB
            
 
             // Create the startup window
-            GestionFrais wnd = new GestionFrais(thedaofichefrais, thedaofraisforfait, thedaolignefraisforfait, thedaolignefraishorsforfait);
+            GestionFrais wnd = new GestionFrais(thedaofichefrais, thedaofraisforfait, thedaolignefraisforfait, thedaolignefraishorsforfait, thedaoetat);
             wnd.Show();
 
         }

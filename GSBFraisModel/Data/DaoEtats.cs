@@ -62,5 +62,17 @@ namespace GSBFrais.Model.Data
             DataRow result = this.unDbal.SelectById("etat", idEtat);
             return new Etat((string)result["id"], (string)result["libelle"]);
         }
+
+        public List<string> SelectListEtat()
+        {
+            List<string> listEtat = new List<string>();
+            string query = " libelle FROM Etat";
+            DataTable myTable = this.unDbal.Select(query);
+            foreach (DataRow r in myTable.Rows)
+            {
+                listEtat.Add((string)r["libelle"]);
+            }
+            return listEtat;
+        }
     }
 }
