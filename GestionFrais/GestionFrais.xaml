@@ -23,7 +23,7 @@
             <ListBox x:Name="dataGrid" ItemsSource="{Binding ListFicheFrais}" SelectedItem="{Binding SelectedFicheFrais}" Margin="10,10,10,13" Grid.Row="1" FontSize="14" SelectionChanged="dataGrid_SelectionChanged"/>
             <Button x:Name="button" Content="Valider la liste de frais" Margin="10,20,0,0" Grid.Row="2" HorizontalAlignment="Left" Width="147" Height="30" VerticalAlignment="Top" />
             <Button x:Name="button1" Content="Suivre le paiement" Command="{Binding EtatFiche}" Margin="10,10,0,0" Grid.Row="3" HorizontalAlignment="Left" Width="147" Height="29" VerticalAlignment="Top" Click="button1_Click"/>
-            <ComboBox x:Name="comboBox1" Visibility="Hidden" ItemsSource="{Binding ListEtat}" IsEditable="True" IsReadOnly="True" Text="{Binding Suivi}" HorizontalAlignment="Left" Margin="195,10,0,0" Grid.Row="3" VerticalAlignment="Top" Width="168" Height="29"/>
+            <ComboBox x:Name="comboBox1" Visibility="Hidden" ItemsSource="{Binding ListEtat}" SelectedItem="{Binding SelectedEtat}" IsEditable="True" IsReadOnly="True" Text="{Binding Suivi}" HorizontalAlignment="Left" Margin="195,10,0,0" Grid.Row="3" VerticalAlignment="Top" Width="168" Height="29"/>
         </Grid>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
