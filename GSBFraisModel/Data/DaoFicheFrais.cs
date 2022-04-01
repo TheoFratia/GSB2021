@@ -29,7 +29,8 @@ namespace GSBFraisModel.Data
 
         public void Insert(FicheFrais theFicheFrais)
         {
-            string query = "FicheFrais (idVisiteur, mois, nbJustificatifs, montantValide, dateModif, idEtat) VALUES ('" + theFicheFrais.UnVisiteur.Id + "','" + theFicheFrais.Mois + "','" + theFicheFrais.NbJustificatifs + "','" + theFicheFrais.MontantValide + "','" + theFicheFrais.DateModif + "','" + theFicheFrais.UnEtat.Id + "')";
+            string montant = theFicheFrais.MontantValide.ToString();
+            string query = "FicheFrais (idVisiteur, mois, nbJustificatifs, montantValide, dateModif, idEtat) VALUES ('" + theFicheFrais.UnVisiteur.Id + "','" + theFicheFrais.Mois + "','" + theFicheFrais.NbJustificatifs + "','" + montant.Replace(",", ".") + "','" + theFicheFrais.DateModif + "','" + theFicheFrais.UnEtat.Id + "')";
             this.thedbal.Insert(query);
         }
 

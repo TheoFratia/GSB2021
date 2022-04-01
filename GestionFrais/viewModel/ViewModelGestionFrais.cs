@@ -299,9 +299,31 @@ namespace GestionFrais.viewModel
         }
         private void ReporterMois()
         {
+            DateTime today = DateTime.Now;
+            string date = today.ToString("yyyyMM");
+            bool verif = false;
             if (SelectedHorsForfait != null)
             {
-               
+                foreach (FicheFrais lff in ListFicheFrais)
+                {
+                    if(lff.Mois == date && SelectedHorsForfait.IdVisiteur == lff.UnVisiteur.Id)
+                    {
+                        LigneFraisHorsForfait lfhf = new LigneFraisHorsForfait(SelectedHorsForfait.Id, SelectedHorsForfait.IdVisiteur, date, SelectedHorsForfait.Libelle, SelectedHorsForfait.Date, SelectedHorsForfait.Montant);
+                        vmDaoLigneFraisHorsForfait.Update(lfhf);
+                        listLigneFraisHorsForfait.Remove(SelectedHorsForfait);
+                        verif = true;
+                    }
+                }
+                if(verif == false)
+                {
+                    FicheFrais uneFicheFrais = new FicheFrais(SelectedFicheFrais.UnVisiteur, date, SelectedFicheFrais.MontantValide, SelectedFicheFrais.NbJustificatifs, SelectedFicheFrais.DateModif, SelectedFicheFrais.UnEtat);
+                    vmDaoFicheFrais.Insert(uneFicheFrais);
+                    LigneFraisHorsForfait lfhf = new LigneFraisHorsForfait(SelectedHorsForfait.Id, SelectedHorsForfait.IdVisiteur, date, SelectedHorsForfait.Libelle, SelectedHorsForfait.Date, SelectedHorsForfait.Montant);
+                    vmDaoLigneFraisHorsForfait.Update(lfhf);
+                    listLigneFraisHorsForfait.Remove(SelectedHorsForfait);
+                    selectedFicheFrais.LesLigneFraisHorsForfait = new List<LigneFraisHorsForfait>(selectedFicheFrais.LesLigneFraisHorsForfait);
+                }
+
             }
         }
         

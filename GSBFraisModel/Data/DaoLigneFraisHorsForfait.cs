@@ -31,6 +31,7 @@ namespace GSBFrais.Model.Data
             string query = " ligneFraisHorsForfait SET montant=" + montant.Replace(",",".")
                 +", libelle='" + uneLigneFraisHorsForfait.Libelle.Replace("'", "''")
                 +"', date='" + uneLigneFraisHorsForfait.Date.ToString("yyyy-MM-dd")
+                +"', mois='" + uneLigneFraisHorsForfait.Mois
                 + "' WHERE id=" + uneLigneFraisHorsForfait.Id;
             this.unDbal.Update(query);
         }
