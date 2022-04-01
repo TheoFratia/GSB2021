@@ -29,9 +29,13 @@ namespace GestionFrais.viewModel
         private string selectedMois;
         private Etat selectedEtat;
         private FicheFrais selectedFicheFrais;
+        private LigneFraisForfait selectedForfait;
+        private LigneFraisHorsForfait selectedHorsForfait;
 
         private ICommand updateFicheFrais;
         private ICommand etatFiche;
+        private ICommand refusLigne;
+        private ICommand report;
 
         private DaoEtat vmDaoEtats;
         private DaoFicheFrais vmDaoFicheFrais;
@@ -148,6 +152,30 @@ namespace GestionFrais.viewModel
 
             }
         }
+        public ICommand Report
+        {
+            get
+            {
+                if (this.report == null)
+                {
+                    this.report = new RelayCommand(() => ReporterMois(), () => true);
+                }
+                return this.report;
+
+            }
+        }
+
+        public ICommand RefusLigne
+        {
+            get
+            {
+                if (this.refusLigne == null)
+                {
+                    this.refusLigne = new RelayCommand(() => RefuserLaLigne(), () => true);
+                }
+                return this.refusLigne;
+            }
+        }
 
         public string Suivi
         {
@@ -189,6 +217,36 @@ namespace GestionFrais.viewModel
             }
         }
 
+        public LigneFraisForfait SelectedForfait
+        {
+            get
+            {
+                return selectedForfait;
+            }
+
+            set
+            {
+                selectedForfait = value;
+                OnPropertyChanged("SelectedForfait");
+                selectedHorsForfait = null;
+            }
+        }
+
+        public LigneFraisHorsForfait SelectedHorsForfait
+        {
+            get
+            {
+                return selectedHorsForfait;
+            }
+
+            set
+            {
+                selectedHorsForfait = value;
+                OnPropertyChanged("SelectedHorsForfait");
+                selectedForfait = null;
+            }
+        }
+
         public ViewModelGestionFrais(DaoFicheFrais thedaofichefrais, DaoFraisForfait thedaofraisforfait, DaoLigneFraisForfait thedaolignefraisforfait, DaoLigneFraisHorsForfait thedaolignefraishorsforfait, DaoEtat theDaoEtat)
         {
             vmDaoFicheFrais = thedaofichefrais;
@@ -223,6 +281,30 @@ namespace GestionFrais.viewModel
             }
 
         }
+        private void RefuserLaLigne()
+        {
+            if(SelectedForfait != null && SelectedHorsForfait == null)
+            {
+                vmDaoLigneFraisForfait.Delete(selectedForfait);
+                ListLigneFraisForfait.Remove(selectedForfait);
+                selectedFicheFrais.LesLigneFraisForfait = new List<LigneFraisForfait>(selectedFicheFrais.LesLigneFraisForfait);
+
+            }
+            else if(SelectedHorsForfait != null && SelectedForfait == null)
+            {
+                vmDaoLigneFraisHorsForfait.Delete(selectedHorsForfait);
+                listLigneFraisHorsForfait.Remove(SelectedHorsForfait);
+                selectedFicheFrais.LesLigneFraisHorsForfait = new List<LigneFraisHorsForfait>(selectedFicheFrais.LesLigneFraisHorsForfait);
+            }
+        }
+        private void ReporterMois()
+        {
+            if (SelectedHorsForfait != null)
+            {
+               
+            }
+        }
+        
 
         private void SuivreEtatFiche()
         {

@@ -35,23 +35,23 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Label x:Name="label" Content="Eléments forfaitisés" Margin="134,10,81,10" FontSize="15" FontWeight="Bold"/>
-            <DataGrid x:Name="dataGrid1" SelectionMode="Single" AutoGenerateColumns="False" ItemsSource="{Binding ListLigneFraisForfait}" Margin="10,10,10,11" Grid.Row="1">
+            <DataGrid x:Name="dataGrid1" SelectedItem="{Binding SelectedForfait}" SelectionMode="Single" AutoGenerateColumns="False" ItemsSource="{Binding ListLigneFraisForfait}" Margin="10,10,10,11" Grid.Row="1">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="idfraisforfait" Binding="{Binding IdFraitForfait}"></DataGridTextColumn>
-                    <DataGridTextColumn Header="mois" Binding="{Binding Mois}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="idfraisforfait" IsReadOnly="True" Binding="{Binding IdFraitForfait}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="mois" IsReadOnly="True" Binding="{Binding Mois}"></DataGridTextColumn>
                     <DataGridTextColumn Header="qantite" Binding="{Binding Quantite}"></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
             <Label x:Name="label1" Content="Eléments hors forfait" FontWeight="Bold" Margin="119,14,109,0" Grid.Row="2" VerticalAlignment="Top" FontSize="15"/>
-            <Button x:Name="button2" Content="Reporter le frais au mois suivant" Margin="0,10,10,0" Grid.Row="4" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Width="181"/>
-            <Button x:Name="button3" Content="Refuser la ligne de frais" Margin="248,12,0,0" Grid.Row="5" Height="27" VerticalAlignment="Top" HorizontalAlignment="Left" Width="138"/>
+            <Button x:Name="button2" Command="{Binding Report}" Content="Reporter le frais au mois suivant" Margin="0,10,10,0" Grid.Row="4" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Width="181"/>
+            <Button x:Name="button3" Content="Refuser la ligne de frais" Command="{Binding RefusLigne}" Margin="248,12,0,0" Grid.Row="5" Height="27" VerticalAlignment="Top" HorizontalAlignment="Left" Width="138"/>
             <Button x:Name="button4" Content="Envoyer un message" Margin="124,12,0,0" Grid.Row="5" RenderTransformOrigin="-0.427,-0.318" Height="27" VerticalAlignment="Top" HorizontalAlignment="Left" Width="119"/>
             <Button x:Name="button5" Command="{Binding UpdateFicheFrais}"  Content="Modifier" Margin="37,12,0,0" Grid.Row="5" Height="27" VerticalAlignment="Top" HorizontalAlignment="Left" Width="82"/>
-            <DataGrid x:Name="dataGrid2" SelectionMode="Single" AutoGenerateColumns="False" ItemsSource="{Binding ListLigneFraisHorsForfait}" Margin="10,10,10,12" Grid.Row="3">
+            <DataGrid x:Name="dataGrid2" SelectionMode="Single" SelectedItem="{Binding SelectedHorsForfait}" AutoGenerateColumns="False" ItemsSource="{Binding ListLigneFraisHorsForfait}" Margin="10,10,10,12" Grid.Row="3">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="mois" Binding="{Binding Mois}"></DataGridTextColumn>
-                    <DataGridTextColumn Header="libelle" Binding="{Binding Libelle}"></DataGridTextColumn>
-                    <DataGridTextColumn Header="date" Binding="{Binding Date}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="mois" IsReadOnly="True" Binding="{Binding Mois}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="libelle" IsReadOnly="True" Binding="{Binding Libelle}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="date" IsReadOnly="True" Binding="{Binding Date}"></DataGridTextColumn>
                     <DataGridTextColumn Header="montant" Binding="{Binding Montant}"></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>

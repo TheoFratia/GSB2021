@@ -36,7 +36,7 @@ namespace GSBFrais.Model.Data
 
         public void Delete(LigneFraisForfait uneLigneFraisForfait)
         {
-            string query = " visiteur WHERE idVisiteur ='" + uneLigneFraisForfait.IdVisiteur + "'AND idFraitForfait ='"+ uneLigneFraisForfait.IdFraitForfait + "'";
+            string query = " ligneFraisForfait WHERE idVisiteur ='" + uneLigneFraisForfait.IdVisiteur + "' AND idFraisForfait ='"+ uneLigneFraisForfait.IdFraitForfait + "'";
             this.unDbal.Delete(query);
         }
 

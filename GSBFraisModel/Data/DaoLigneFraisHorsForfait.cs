@@ -21,7 +21,7 @@ namespace GSBFrais.Model.Data
 
         public void Insert(LigneFraisHorsForfait LigneFraisHorsForfait)
         {
-            string query = " ligneFraisForfait (idVisiteur, mois, idFraitForfait, quantite) VALUES ('" + LigneFraisHorsForfait.Id + "',' " + LigneFraisHorsForfait.IdVisiteur + "','" + LigneFraisHorsForfait.Mois + "','" + LigneFraisHorsForfait.Libelle + "','" + LigneFraisHorsForfait.Date + "','" + LigneFraisHorsForfait.Montant + "')";
+            string query = " ligneFraisHorsForfait (idVisiteur, mois, idFraitForfait, quantite) VALUES ('" + LigneFraisHorsForfait.Id + "',' " + LigneFraisHorsForfait.IdVisiteur + "','" + LigneFraisHorsForfait.Mois + "','" + LigneFraisHorsForfait.Libelle + "','" + LigneFraisHorsForfait.Date + "','" + LigneFraisHorsForfait.Montant + "')";
             this.unDbal.Insert(query);
         }
 
@@ -37,7 +37,7 @@ namespace GSBFrais.Model.Data
 
         public void Delete(LigneFraisHorsForfait LigneFraisHorsForfait)
         {
-            string query = " visiteur WHERE idVisiteur ='" + LigneFraisHorsForfait.IdVisiteur + "'AND id ='" + LigneFraisHorsForfait.Id + "'";
+            string query = " ligneFraisHorsForfait WHERE idVisiteur ='" + LigneFraisHorsForfait.IdVisiteur + "'AND id ='" + LigneFraisHorsForfait.Id + "'";
             this.unDbal.Delete(query);
         }
 
