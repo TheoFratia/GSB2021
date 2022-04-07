@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace GestionFrais.viewModel
@@ -27,6 +28,7 @@ namespace GestionFrais.viewModel
 
 
         private string selectedMois;
+        private string rechercheNom;
         private Etat selectedEtat;
         private FicheFrais selectedFicheFrais;
         private LigneFraisForfait selectedForfait;
@@ -36,7 +38,8 @@ namespace GestionFrais.viewModel
         private ICommand etatFiche;
         private ICommand refusLigne;
         private ICommand report;
-
+        private ICommand validerFicheFrais;
+        
         private DaoEtat vmDaoEtats;
         private DaoFicheFrais vmDaoFicheFrais;
         private DaoFraisForfait vmDaoFraisForfait;
@@ -137,6 +140,31 @@ namespace GestionFrais.viewModel
                 }
                 return this.updateFicheFrais;
 
+            }
+        }
+
+        public ICommand ValiderFicheFrais
+        {
+            get
+            {
+                if (this.validerFicheFrais == null)
+                {
+                    this.validerFicheFrais = new RelayCommand(() => Valider(), () => true);
+                }
+                return this.validerFicheFrais;
+
+            }
+        }
+
+        private void Valider()
+        {
+            if (SelectedFicheFrais.UnEtat.Id != "RB" && SelectedFicheFrais.UnEtat.Id != "CL")
+            {
+                SelectedFicheFrais.UnEtat.Id = "VA";
+                SelectedFicheFrais.UnEtat.Libelle = "Validée et mise en paiement";
+                Suivi = SelectedFicheFrais.UnEtat.Libelle;
+                vmDaoFicheFrais.Update(SelectedFicheFrais);
+                OnPropertyChanged("Suivi");
             }
         }
 
@@ -257,6 +285,7 @@ namespace GestionFrais.viewModel
             listEtat = new ObservableCollection<Etat>(theDaoEtat.SelectListEtat());
             listMois = new ObservableCollection<string>(thedaofichefrais.SelectListMois());
             listFicheFrais = new ObservableCollection<FicheFrais>(thedaofichefrais.SelectAll());
+            listVisiteur = new ObservableCollection<Visiteur>();
 
         }
         private void UpdateLesFicheFrais()

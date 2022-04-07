@@ -107,6 +107,5 @@ namespace GSBFraisModel.Data
             }
             return listeFicheFrais;
         }
-
     }
 }
