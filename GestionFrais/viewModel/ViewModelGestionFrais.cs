@@ -306,6 +306,8 @@ namespace GestionFrais.viewModel
                 {
                     vmDaoLigneFraisHorsForfait.Update(lfhf);
                 }
+                SelectedFicheFrais.UnEtat.Libelle = SelectedEtat.Libelle;
+                Suivi = SelectedFicheFrais.UnEtat.Libelle;
                 vmDaoFicheFrais.Update(SelectedFicheFrais);
             }
 
