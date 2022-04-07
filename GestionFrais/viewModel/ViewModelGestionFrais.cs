@@ -312,14 +312,7 @@ namespace GestionFrais.viewModel
         }
         private void RefuserLaLigne()
         {
-            if(SelectedForfait != null && SelectedHorsForfait == null)
-            {
-                vmDaoLigneFraisForfait.Delete(selectedForfait);
-                ListLigneFraisForfait.Remove(selectedForfait);
-                selectedFicheFrais.LesLigneFraisForfait = new List<LigneFraisForfait>(selectedFicheFrais.LesLigneFraisForfait);
-
-            }
-            else if(SelectedHorsForfait != null && SelectedForfait == null)
+            if(SelectedHorsForfait != null && SelectedForfait == null)
             {
                 vmDaoLigneFraisHorsForfait.Delete(selectedHorsForfait);
                 listLigneFraisHorsForfait.Remove(SelectedHorsForfait);
@@ -330,20 +323,16 @@ namespace GestionFrais.viewModel
         {
             DateTime today = DateTime.Now;
             string date = today.ToString("yyyyMM");
-            bool verif = false;
             if (SelectedHorsForfait != null)
             {
-                foreach (FicheFrais lff in ListFicheFrais)
-                {
-                    if(lff.Mois == date && SelectedHorsForfait.IdVisiteur == lff.UnVisiteur.Id)
+                    if(vmDaoFicheFrais.SelectById(SelectedHorsForfait.IdVisiteur, date) != null)
                     {
                         LigneFraisHorsForfait lfhf = new LigneFraisHorsForfait(SelectedHorsForfait.Id, SelectedHorsForfait.IdVisiteur, date, SelectedHorsForfait.Libelle, SelectedHorsForfait.Date, SelectedHorsForfait.Montant);
                         vmDaoLigneFraisHorsForfait.Update(lfhf);
                         listLigneFraisHorsForfait.Remove(SelectedHorsForfait);
-                        verif = true;
                     }
                 }
-                if(verif == false)
+                else
                 {
                     FicheFrais uneFicheFrais = new FicheFrais(SelectedFicheFrais.UnVisiteur, date, SelectedFicheFrais.MontantValide, SelectedFicheFrais.NbJustificatifs, SelectedFicheFrais.DateModif, SelectedFicheFrais.UnEtat);
                     vmDaoFicheFrais.Insert(uneFicheFrais);
@@ -352,8 +341,6 @@ namespace GestionFrais.viewModel
                     listLigneFraisHorsForfait.Remove(SelectedHorsForfait);
                     selectedFicheFrais.LesLigneFraisHorsForfait = new List<LigneFraisHorsForfait>(selectedFicheFrais.LesLigneFraisHorsForfait);
                 }
-
-            }
         }
         
 

@@ -85,7 +85,7 @@ namespace GSBFraisModel.Data
 
         internal DataRow SelectById2(string table, string id, string mois)
         {
-            string query = "SELECT * FROM " + table + " where idVisiteur='" + id + "AND mois=" + mois + "'";
+            string query = "SELECT * FROM " + table + " where idVisiteur='" + id + "' AND mois='" + mois + "'";
             DataSet dataset = RQuery(query);
             return dataset.Tables[0].Rows[0];
         }
